@@ -156,43 +156,28 @@ a {
 }
 
 .menu-toggle {
-  margin-left: auto;
-  order: 2;
-  padding: 9px 12px;
-  border-radius: 12px;
-  border: 1px solid rgba(15, 23, 42, 0.14);
-  background: rgba(255, 255, 255, 0.9);
-  font-weight: 800;
-  cursor: pointer;
+  display: none;
 }
 
 .nav {
-  display: none;
+  display: flex;
   position: static;
-  order: 4;
+  order: 3;
   width: 100%;
   gap: 8px;
-  grid-template-columns: 1fr 1fr;
-  padding: 4px 0 0;
-  border-radius: 14px;
-  border: 0;
-  background: transparent;
-  box-shadow: none;
-}
-
-.header-inner.nav-open .nav {
-  display: grid;
+  overflow-x: auto;
+  padding: 2px 0 0;
 }
 
 .nav-link {
-  flex: initial;
-  font-size: 13px;
+  flex: 0 0 auto;
+  font-size: 12px;
   color: rgba(15, 23, 42, 0.72);
-  padding: 8px 10px;
-  border-radius: 12px;
-  border: 1px solid rgba(15, 23, 42, 0.1);
-  background: rgba(255, 255, 255, 0.82);
-  text-align: center;
+  padding: 6px 8px;
+  border-radius: 10px;
+  border: 0;
+  background: transparent;
+  text-align: left;
   font-weight: 700;
 }
 
@@ -203,7 +188,7 @@ a {
 
 .header-cta {
   margin-left: auto;
-  order: 3;
+  order: 2;
 }
 
 /* Buttons */
@@ -1092,10 +1077,6 @@ a {
     flex-wrap: nowrap;
   }
 
-  .menu-toggle {
-    display: none;
-  }
-
   .nav {
     display: flex;
     position: static;
@@ -1104,11 +1085,7 @@ a {
     margin-left: auto;
     overflow: visible;
     padding-bottom: 0;
-    grid-template-columns: none;
     gap: 14px;
-    border: 0;
-    background: transparent;
-    box-shadow: none;
     padding: 0;
   }
 

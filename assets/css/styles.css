@@ -1142,7 +1142,7 @@ body.mobile-nav-open .mobile-nav-drawer {
   position: fixed;
   right: 14px;
   bottom: 14px;
-  z-index: 60;
+  z-index: 90;
   display: inline-flex;
   align-items: center;
   gap: 10px;
@@ -1152,6 +1152,14 @@ body.mobile-nav-open .mobile-nav-drawer {
   background: linear-gradient(135deg, #22c55e, #15803d);
   box-shadow: 0 22px 54px rgba(21, 128, 61, 0.28);
   border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+@media (max-width: 719px) {
+  .wa-float {
+    display: inline-flex !important;
+    right: max(12px, env(safe-area-inset-right));
+    bottom: max(12px, env(safe-area-inset-bottom));
+  }
 }
 
 .wa-float:hover {

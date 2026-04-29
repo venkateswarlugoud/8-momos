@@ -28,7 +28,7 @@
   };
 
   const state = {
-    items: /** @type {Array<{id:string,name:string,qty:number,vegType:string}>} */ ([]),
+    items: /** @type {Array<{id:string,name:string,qty:number,vegType:string,allowedVegTypes:string[]}>} */ ([]),
   };
 
   const uid = () => `${Date.now().toString(36)}${Math.random().toString(36).slice(2, 8)}`;
@@ -55,15 +55,26 @@
     if (el.deliveryFields) el.deliveryFields.style.display = isDelivery ? "grid" : "none";
   }
 
-  function addItem(name) {
+  function addItem(name, allowedVegTypes = ["Veg", "Non-Veg"]) {
     const safeName = String(name || "").trim();
     if (!safeName) return;
+    const normalizedAllowed = Array.from(new Set(allowedVegTypes));
+    const signature = normalizedAllowed.join("|");
+    const defaultVegType = normalizedAllowed.length === 1 ? normalizedAllowed[0] : "";
 
-    const existing = state.items.find((it) => it.name === safeName && (it.vegType || "") === "");
+    const existing = state.items.find(
+      (it) => it.name === safeName && it.allowedVegTypes.join("|") === signature,
+    );
     if (existing) {
       existing.qty += 1;
     } else {
-      state.items.push({ id: uid(), name: safeName, qty: 1, vegType: "" });
+      state.items.push({
+        id: uid(),
+        name: safeName,
+        qty: 1,
+        vegType: defaultVegType,
+        allowedVegTypes: normalizedAllowed,
+      });
     }
     renderItems();
     openDrawer();
@@ -84,6 +95,11 @@
   function setVegType(id, vegType) {
     const it = state.items.find((x) => x.id === id);
     if (!it) return;
+    if (vegType === "" && it.allowedVegTypes.length > 1) {
+      it.vegType = "";
+      return;
+    }
+    if (!it.allowedVegTypes.includes(vegType)) return;
     it.vegType = vegType;
   }
 
@@ -92,12 +108,49 @@
     renderItems();
   }
 
+  function vegClass(vegType) {
+    if (vegType === "Veg") return "veg-select veg-select--veg";
+    if (vegType === "Non-Veg") return "veg-select veg-select--nonveg";
+    return "veg-select";
+  }
+
+  function vegOptionsHtml(it) {
+    const options = [];
+    if (it.allowedVegTypes.length > 1) {
+      options.push(`<option value="" ${it.vegType === "" ? "selected" : ""}>Select</option>`);
+    }
+    options.push(
+      ...it.allowedVegTypes.map(
+        (type) => `<option value="${type}" ${it.vegType === type ? "selected" : ""}>${type}</option>`,
+      ),
+    );
+    return options.join("");
+  }
+
+  function vegLegendHtml(it) {
+    const pills = [];
+    if (it.allowedVegTypes.includes("Veg")) {
+      pills.push(`<span class="veg-pill veg-pill--veg"><span class="veg-pill-dot"></span>Veg</span>`);
+    }
+    if (it.allowedVegTypes.includes("Non-Veg")) {
+      pills.push(`<span class="veg-pill veg-pill--nonveg"><span class="veg-pill-dot"></span>Non-Veg</span>`);
+    }
+    return pills.join("");
+  }
+
+  function fixedTypeHtml(it) {
+    if (it.allowedVegTypes.length !== 1) return "";
+    const type = it.allowedVegTypes[0];
+    const klass = type === "Veg" ? "veg-fixed veg-fixed--veg" : "veg-fixed veg-fixed--nonveg";
+    return `<span class="${klass}" aria-label="Food type">${type}</span>`;
+  }
+
   function renderItems() {
     if (!itemsEl) return;
 
     if (state.items.length === 0) {
       itemsEl.innerHTML = `
-        <div class="order-empty">
+        <div class="order-empty" id="orderItemsEmpty">
           <p class="order-empty-title">No items yet</p>
           <p class="order-empty-text">Tap any menu item to add it.</p>
         </div>
@@ -114,12 +167,13 @@
               <p class="order-item-name">${escapeHtml(it.name)}</p>
               <div class="order-item-meta">
                 <label class="mini-field">
-                  <span class="mini-label">Veg / Non-Veg</span>
-                  <select class="mini-input" data-veg>
-                    <option value="" ${it.vegType === "" ? "selected" : ""}>Select</option>
-                    <option value="Veg" ${it.vegType === "Veg" ? "selected" : ""}>Veg</option>
-                    <option value="Non-Veg" ${it.vegType === "Non-Veg" ? "selected" : ""}>Non-Veg</option>
-                  </select>
+                  <span class="mini-label">Food Type</span>
+                  <div class="veg-legend" aria-hidden="true">${vegLegendHtml(it)}</div>
+                  ${
+                    it.allowedVegTypes.length === 1
+                      ? fixedTypeHtml(it)
+                      : `<select class="mini-input ${vegClass(it.vegType)}" data-veg>${vegOptionsHtml(it)}</select>`
+                  }
                 </label>
               </div>
             </div>
@@ -153,7 +207,15 @@
       row.querySelector("[data-remove]")?.addEventListener("click", () => removeItem(id));
 
       const vegSel = row.querySelector("[data-veg]");
-      vegSel?.addEventListener("change", () => setVegType(id, /** @type {HTMLSelectElement} */ (vegSel).value));
+      if (vegSel) {
+        vegSel.addEventListener("change", () => {
+          const value = /** @type {HTMLSelectElement} */ (vegSel).value;
+          setVegType(id, value);
+          vegSel.classList.remove("veg-select--veg", "veg-select--nonveg");
+          if (value === "Veg") vegSel.classList.add("veg-select--veg");
+          if (value === "Non-Veg") vegSel.classList.add("veg-select--nonveg");
+        });
+      }
     });
   }
 
@@ -163,10 +225,10 @@
     lines.push("");
 
     if (state.items.length === 0) {
-      lines.push("My order:");
+      lines.push("Order items:");
       lines.push("- (please help me choose) ");
     } else {
-      lines.push("My order:");
+      lines.push("Order items:");
       state.items.forEach((it, i) => {
         const veg = it.vegType ? ` (${it.vegType})` : "";
         lines.push(`${i + 1}) ${it.name}${veg} x${it.qty}`);
@@ -180,27 +242,111 @@
     const name = (el.name?.value || "").trim();
     const phone = (el.phone?.value || "").trim();
     const time = (el.time?.value || "").trim();
-    const address = (el.address?.value || "").trim();
+    const address = (el.address?.value || "").trim().replace(/\s*\n+\s*/g, ", ");
     const maps = (el.maps?.value || "").trim();
 
+    if (spice) {
+      lines.push("");
+      lines.push("Food preferences:");
+      lines.push(`- Spice level: ${spice}`);
+    }
+
     lines.push("");
-    lines.push("Details:");
-    if (spice) lines.push(`- Spice: ${spice}`);
-    lines.push(`- Pickup/Delivery: ${fulfillment}`);
+    lines.push("Delivery / Pickup:");
+    lines.push(`- Mode: ${fulfillment}`);
     if (fulfillment === "Delivery") {
       if (address) lines.push(`- Address: ${address}`);
-      if (maps) lines.push(`- Maps: ${maps}`);
+      if (maps) lines.push(`- Google Maps link: ${maps}`);
     }
-    if (payment) lines.push(`- Payment: ${payment}`);
-    if (name) lines.push(`- Name: ${name}`);
-    if (phone) lines.push(`- Phone: ${phone}`);
-    if (time) lines.push(`- Preferred time: ${time}`);
-    if (notes) lines.push(`- Notes: ${notes}`);
+
+    if (payment) {
+      lines.push("");
+      lines.push("Payment:");
+      lines.push(`- Method: ${payment}`);
+    }
+
+    if (name || phone || time) {
+      lines.push("");
+      lines.push("Customer details:");
+      if (name) lines.push(`- Name: ${name}`);
+      if (phone) lines.push(`- Phone: ${phone}`);
+      if (time) lines.push(`- Preferred time: ${time}`);
+    }
+
+    if (notes) {
+      lines.push("");
+      lines.push("Extra instructions:");
+      lines.push(`- ${notes}`);
+    }
 
     lines.push("");
     lines.push("Please confirm total and ETA. Thanks!");
 
     return lines.join("\n");
+  }
+
+  function ensureErrorNode(inputEl) {
+    if (!inputEl || !inputEl.parentElement) return null;
+    let node = inputEl.parentElement.querySelector(".field-error");
+    if (node) return node;
+    node = document.createElement("p");
+    node.className = "field-error";
+    node.setAttribute("aria-live", "polite");
+    inputEl.parentElement.appendChild(node);
+    return node;
+  }
+
+  function setFieldError(inputEl, message) {
+    if (!inputEl) return;
+    const errNode = ensureErrorNode(inputEl);
+    inputEl.classList.add("is-invalid");
+    if (errNode) errNode.textContent = message;
+  }
+
+  function clearFieldError(inputEl) {
+    if (!inputEl || !inputEl.parentElement) return;
+    inputEl.classList.remove("is-invalid");
+    const errNode = inputEl.parentElement.querySelector(".field-error");
+    if (errNode) errNode.textContent = "";
+  }
+
+  function validateOrderForm() {
+    let valid = true;
+    const name = (el.name?.value || "").trim();
+    const phone = (el.phone?.value || "").trim();
+    const fulfillment = el.fulfillment();
+    const address = (el.address?.value || "").trim();
+
+    [el.name, el.phone, el.address].forEach(clearFieldError);
+
+    if (state.items.length === 0) {
+      valid = false;
+      const emptyBox = document.getElementById("orderItemsEmpty");
+      if (emptyBox) emptyBox.classList.add("order-empty--error");
+    } else {
+      const emptyBox = document.getElementById("orderItemsEmpty");
+      if (emptyBox) emptyBox.classList.remove("order-empty--error");
+    }
+
+    if (!name) {
+      valid = false;
+      setFieldError(el.name, "Please enter your name");
+    }
+
+    if (!phone) {
+      valid = false;
+      setFieldError(el.phone, "Please enter your phone number");
+    } else if (!/^\d{10}$/.test(phone.replace(/\s+/g, ""))) {
+      valid = false;
+      setFieldError(el.phone, "Enter a valid 10-digit phone number");
+    }
+
+    if (fulfillment === "Delivery" && !address) {
+      valid = false;
+      setFieldError(el.address, "Please enter delivery address");
+    }
+
+    return valid;
   }
 
   function escapeHtml(str) {
@@ -230,8 +376,13 @@
     clearBtn?.addEventListener("click", clearAll);
 
     waBtn?.addEventListener("click", () => {
+      if (!validateOrderForm()) return;
       const text = buildWhatsAppText();
       window.open(whatsappHref(text), "_blank", "noopener,noreferrer");
+    });
+
+    [el.name, el.phone, el.address].forEach((input) => {
+      input?.addEventListener("input", () => clearFieldError(input));
     });
 
     // WhatsApp buttons open the drawer instead of jumping immediately.
@@ -256,11 +407,40 @@
       .querySelectorAll(".menu-matrix-row:not(.menu-matrix-head)")
       .forEach((x) => clickables.push(x));
 
-    const getItemName = (node) => {
+    const getAllowedFromName = (name) => {
+      const n = String(name).toLowerCase();
+      const nonVegWords = ["chicken", "wings", "lollipop", "egg", "mutton", "fish", "prawn"];
+      const vegWords = ["paneer", "gobi", "tomato", "veg ", "veggie", "vegetable", "corn"];
+
+      if (nonVegWords.some((w) => n.includes(w))) return ["Non-Veg"];
+      if (vegWords.some((w) => n.includes(w))) return ["Veg"];
+      return ["Veg", "Non-Veg"];
+    };
+
+    const parseMatrixAllowed = (node) => {
+      const cells = node.querySelectorAll("[role='cell']");
+      const vegPrice = (cells[1]?.textContent || "").trim();
+      const nonVegPrice = (cells[2]?.textContent || "").trim();
+      const vegAvailable = vegPrice !== "" && vegPrice !== "—" && vegPrice !== "-";
+      const nonVegAvailable = nonVegPrice !== "" && nonVegPrice !== "—" && nonVegPrice !== "-";
+
+      if (vegAvailable && nonVegAvailable) return ["Veg", "Non-Veg"];
+      if (vegAvailable) return ["Veg"];
+      if (nonVegAvailable) return ["Non-Veg"];
+      return ["Veg", "Non-Veg"];
+    };
+
+    const getItemMeta = (node) => {
       if (node.classList.contains("menu-item")) {
-        return (node.querySelector(".mi-name")?.textContent || "").trim();
+        const name = (node.querySelector(".mi-name")?.textContent || "").trim();
+        const sectionId = node.closest("section")?.id || "";
+        if (sectionId === "paneer-momos") return { name, allowed: ["Veg"] };
+        return { name, allowed: getAllowedFromName(name) };
       }
-      return (node.querySelector("[role='cell']")?.textContent || "").trim();
+      const name = (node.querySelector("[role='cell']")?.textContent || "").trim();
+      const fromName = getAllowedFromName(name);
+      if (fromName.length === 1) return { name, allowed: fromName };
+      return { name, allowed: parseMatrixAllowed(node) };
     };
 
     const attach = (node) => {
@@ -269,9 +449,9 @@
       node.setAttribute("data-quick-order", "true");
 
       const handler = () => {
-        const name = getItemName(node);
+        const { name, allowed } = getItemMeta(node);
         if (!name) return;
-        addItem(name);
+        addItem(name, allowed);
       };
 
       node.addEventListener("click", handler);

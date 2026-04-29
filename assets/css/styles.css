@@ -109,6 +109,7 @@ a {
   display: flex;
   align-items: center;
   gap: 12px;
+  flex-wrap: wrap;
   padding: 12px 0;
 }
 
@@ -155,16 +156,23 @@ a {
 }
 
 .nav {
-  display: none;
+  display: flex;
   gap: 14px;
-  margin-left: auto;
+  order: 3;
+  width: 100%;
+  margin-left: 0;
+  overflow-x: auto;
+  padding-bottom: 2px;
 }
 
 .nav-link {
-  font-size: 14px;
+  flex: 0 0 auto;
+  font-size: 13px;
   color: rgba(15, 23, 42, 0.72);
-  padding: 8px 10px;
+  padding: 7px 10px;
   border-radius: 12px;
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  background: rgba(255, 255, 255, 0.82);
 }
 
 .nav-link:hover {
@@ -174,6 +182,7 @@ a {
 
 .header-cta {
   margin-left: auto;
+  order: 2;
 }
 
 /* Buttons */
@@ -1058,12 +1067,21 @@ a {
 
 /* Responsive */
 @media (min-width: 720px) {
+  .header-inner {
+    flex-wrap: nowrap;
+  }
+
   .nav {
-    display: flex;
+    order: 0;
+    width: auto;
+    margin-left: auto;
+    overflow: visible;
+    padding-bottom: 0;
   }
 
   .header-cta {
     margin-left: 0;
+    order: 0;
   }
 
   .hero-card {

@@ -1153,16 +1153,33 @@ body.mobile-nav-open .mobile-nav-drawer {
 }
 
 @media (max-width: 719px) {
+  body {
+    padding-bottom: 84px;
+  }
+
   .wa-float {
     display: inline-flex !important;
     position: fixed !important;
     visibility: visible !important;
     opacity: 1 !important;
-    right: max(12px, env(safe-area-inset-right));
-    bottom: calc(16px + env(safe-area-inset-bottom));
+    left: max(10px, env(safe-area-inset-left));
+    right: max(10px, env(safe-area-inset-right));
+    bottom: calc(10px + env(safe-area-inset-bottom));
     z-index: 9999 !important;
-    padding: 12px 14px;
+    justify-content: center;
+    min-height: 50px;
+    padding: 10px 14px;
     border-radius: 999px;
+    box-shadow: 0 16px 34px rgba(21, 128, 61, 0.34);
+  }
+
+  .wa-icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .wa-text {
+    font-size: 15px;
   }
 }
 

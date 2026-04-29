@@ -11,6 +11,7 @@
   --accent-2: #f18f01;
   --cream: #fff8f3;
   --paper: #ffffff;
+  --paper-2: #fff3ea;
 
   --shadow: 0 18px 50px rgba(15, 23, 42, 0.1);
   --shadow-2: 0 30px 80px rgba(15, 23, 42, 0.16);
@@ -43,9 +44,24 @@ body {
     "Segoe UI Emoji";
   line-height: 1.5;
   color: var(--text);
-  background: radial-gradient(1200px 700px at 10% -10%, rgba(241, 143, 1, 0.12), transparent 55%),
-    radial-gradient(1100px 700px at 95% 10%, rgba(214, 64, 43, 0.1), transparent 52%),
-    #ffffff;
+  background:
+    radial-gradient(1200px 700px at 10% -10%, rgba(241, 143, 1, 0.15), transparent 55%),
+    radial-gradient(1100px 700px at 95% 10%, rgba(214, 64, 43, 0.12), transparent 52%),
+    radial-gradient(900px 620px at 15% 95%, rgba(214, 64, 43, 0.08), transparent 55%),
+    linear-gradient(180deg, var(--paper-2), #ffffff 52%);
+}
+
+/* Subtle paper texture (no extra assets) */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.22;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.28'/%3E%3C/svg%3E");
+  background-size: 220px 220px;
+  mix-blend-mode: multiply;
 }
 
 img,
@@ -372,7 +388,10 @@ a {
 }
 
 .section-alt {
-  background: linear-gradient(180deg, rgba(255, 248, 243, 0.65), #ffffff);
+  background:
+    radial-gradient(900px 420px at 10% 0%, rgba(241, 143, 1, 0.14), transparent 60%),
+    radial-gradient(900px 420px at 90% 0%, rgba(214, 64, 43, 0.12), transparent 60%),
+    linear-gradient(180deg, rgba(255, 248, 243, 0.85), #ffffff);
 }
 
 .section-head {
@@ -542,6 +561,54 @@ a {
   background: linear-gradient(180deg, rgba(255, 255, 255, 1), rgba(255, 248, 243, 0.55));
   box-shadow: var(--shadow);
   overflow: clip;
+}
+
+.menu-cardx-media {
+  height: 118px;
+  background:
+    linear-gradient(180deg, rgba(11, 18, 32, 0.55), rgba(11, 18, 32, 0.22)),
+    radial-gradient(100% 120% at 20% 0%, rgba(241, 143, 1, 0.22), transparent 60%),
+    radial-gradient(100% 120% at 100% 0%, rgba(214, 64, 43, 0.18), transparent 60%);
+  background-size: cover;
+  background-position: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  filter: saturate(1.08) contrast(1.02);
+}
+
+.menu-cardx-media--momos {
+  background-image:
+    linear-gradient(180deg, rgba(11, 18, 32, 0.58), rgba(11, 18, 32, 0.18)),
+    url("../img/menu-momos.jpg");
+}
+
+.menu-cardx-media--paneer {
+  background-image:
+    linear-gradient(180deg, rgba(11, 18, 32, 0.58), rgba(11, 18, 32, 0.18)),
+    url("../img/menu-paneer.jpg");
+}
+
+.menu-cardx-media--rice {
+  background-image:
+    linear-gradient(180deg, rgba(11, 18, 32, 0.58), rgba(11, 18, 32, 0.18)),
+    url("../img/menu-rice.jpg");
+}
+
+.menu-cardx-media--noodles {
+  background-image:
+    linear-gradient(180deg, rgba(11, 18, 32, 0.58), rgba(11, 18, 32, 0.18)),
+    url("../img/menu-noodles.jpg");
+}
+
+.menu-cardx-media--soup {
+  background-image:
+    linear-gradient(180deg, rgba(11, 18, 32, 0.58), rgba(11, 18, 32, 0.18)),
+    url("../img/menu-soup.jpg");
+}
+
+.menu-cardx-media--starters {
+  background-image:
+    linear-gradient(180deg, rgba(11, 18, 32, 0.58), rgba(11, 18, 32, 0.18)),
+    url("../img/menu-starters.jpg");
 }
 
 .menu-cardx::before {

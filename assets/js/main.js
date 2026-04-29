@@ -1,6 +1,29 @@
 (() => {
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+  const menuToggle = document.querySelector(".menu-toggle");
+  const headerInner = document.querySelector(".header-inner");
+  const navEl = document.getElementById("primaryNav");
+
+  function closeMobileNav() {
+    if (!headerInner || !menuToggle) return;
+    headerInner.classList.remove("nav-open");
+    menuToggle.setAttribute("aria-expanded", "false");
+  }
+
+  menuToggle?.addEventListener("click", () => {
+    if (!headerInner) return;
+    const isOpen = headerInner.classList.toggle("nav-open");
+    menuToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+  });
+
+  navEl?.querySelectorAll(".nav-link").forEach((a) => {
+    a.addEventListener("click", closeMobileNav);
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth >= 720) closeMobileNav();
+  });
 
   const WHATSAPP_NUMBER = "916304731856";
 

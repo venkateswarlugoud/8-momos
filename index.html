@@ -509,6 +509,102 @@
       <span class="wa-text">Order on WhatsApp</span>
     </a>
 
+    <!-- Order drawer (in-website checkout to WhatsApp) -->
+    <div class="order-drawer" id="orderDrawer" aria-hidden="true">
+      <div class="order-overlay" data-order-close aria-hidden="true"></div>
+      <div class="order-panel" role="dialog" aria-modal="true" aria-labelledby="orderTitle">
+        <div class="order-head">
+          <div>
+            <p class="order-eyebrow">Quick order</p>
+            <h3 class="order-title" id="orderTitle">Send order on WhatsApp</h3>
+          </div>
+          <button class="icon-btn" type="button" data-order-close aria-label="Close">
+            ✕
+          </button>
+        </div>
+
+        <div class="order-body">
+          <div class="order-section">
+            <div class="order-sec-head">
+              <h4 class="order-sec-title">Your items</h4>
+              <button class="link-btn" type="button" id="orderClearBtn">Clear</button>
+            </div>
+            <div class="order-items" id="orderItems"></div>
+            <p class="order-help">
+              Tip: Tap any item in the menu to add it here.
+            </p>
+          </div>
+
+          <div class="order-grid">
+            <div class="order-section">
+              <h4 class="order-sec-title">Pickup / Delivery</h4>
+              <div class="seg" role="radiogroup" aria-label="Pickup or delivery">
+                <label class="seg-opt">
+                  <input type="radio" name="fulfillment" value="Pickup" checked />
+                  <span>Pickup</span>
+                </label>
+                <label class="seg-opt">
+                  <input type="radio" name="fulfillment" value="Delivery" />
+                  <span>Delivery</span>
+                </label>
+              </div>
+
+              <div class="field" id="deliveryFields">
+                <label class="field-label" for="orderAddress">Delivery address + landmark</label>
+                <textarea class="field-input" id="orderAddress" rows="2" placeholder="House/Street, Area, Landmark"></textarea>
+                <label class="field-label" for="orderMaps">Google Maps link (optional)</label>
+                <input class="field-input" id="orderMaps" type="url" placeholder="Paste Maps link" />
+              </div>
+            </div>
+
+            <div class="order-section">
+              <h4 class="order-sec-title">Preferences</h4>
+              <label class="field-label" for="orderSpice">Spice level</label>
+              <select class="field-input" id="orderSpice">
+                <option value="">Select</option>
+                <option>Mild</option>
+                <option>Medium</option>
+                <option>Spicy</option>
+              </select>
+
+              <label class="field-label" for="orderPayment">Payment</label>
+              <select class="field-input" id="orderPayment">
+                <option value="">Select</option>
+                <option>Cash</option>
+                <option>UPI</option>
+              </select>
+
+              <label class="field-label" for="orderNotes">Special instructions (optional)</label>
+              <input class="field-input" id="orderNotes" type="text" placeholder="Extra chutney, less spicy, etc." />
+            </div>
+          </div>
+
+          <div class="order-section">
+            <h4 class="order-sec-title">Your details</h4>
+            <div class="order-grid-2">
+              <div class="field">
+                <label class="field-label" for="orderName">Name</label>
+                <input class="field-input" id="orderName" type="text" placeholder="Your name" />
+              </div>
+              <div class="field">
+                <label class="field-label" for="orderPhone">Phone</label>
+                <input class="field-input" id="orderPhone" type="tel" placeholder="10-digit number" />
+              </div>
+              <div class="field">
+                <label class="field-label" for="orderTime">Preferred time (optional)</label>
+                <input class="field-input" id="orderTime" type="text" placeholder="Now / 7:30 PM" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="order-foot">
+          <button class="btn btn-ghost" type="button" data-order-close>Continue browsing</button>
+          <button class="btn btn-primary" type="button" id="orderWhatsAppBtn">Open WhatsApp</button>
+        </div>
+      </div>
+    </div>
+
     <script src="./assets/js/main.js" defer></script>
   </body>
 </html>

@@ -1140,7 +1140,7 @@ body.mobile-nav-open .mobile-nav-drawer {
   position: fixed;
   right: 14px;
   bottom: 14px;
-  z-index: 90;
+  z-index: 110;
   display: inline-flex;
   align-items: center;
   gap: 10px;
@@ -1159,12 +1159,10 @@ body.mobile-nav-open .mobile-nav-drawer {
     visibility: visible !important;
     opacity: 1 !important;
     right: max(12px, env(safe-area-inset-right));
-    bottom: max(74px, env(safe-area-inset-bottom));
+    bottom: calc(16px + env(safe-area-inset-bottom));
     z-index: 9999 !important;
-  }
-
-  .wa-float .wa-text {
-    display: none;
+    padding: 12px 14px;
+    border-radius: 999px;
   }
 }
 

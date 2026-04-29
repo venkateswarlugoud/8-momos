@@ -2,22 +2,27 @@
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
   const menuToggle = document.querySelector(".menu-toggle");
-  const headerInner = document.querySelector(".header-inner");
-  const navEl = document.getElementById("primaryNav");
+  const mobileNavDrawer = document.getElementById("mobileNavDrawer");
+  const navCloseEls = document.querySelectorAll("[data-nav-close]");
 
   function closeMobileNav() {
-    if (!headerInner || !menuToggle) return;
-    headerInner.classList.remove("nav-open");
+    if (!menuToggle) return;
+    document.body.classList.remove("mobile-nav-open");
+    if (mobileNavDrawer) mobileNavDrawer.setAttribute("aria-hidden", "true");
     menuToggle.setAttribute("aria-expanded", "false");
   }
 
   menuToggle?.addEventListener("click", () => {
-    if (!headerInner) return;
-    const isOpen = headerInner.classList.toggle("nav-open");
+    const isOpen = document.body.classList.toggle("mobile-nav-open");
+    if (mobileNavDrawer) mobileNavDrawer.setAttribute("aria-hidden", isOpen ? "false" : "true");
     menuToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
   });
 
-  navEl?.querySelectorAll(".nav-link").forEach((a) => {
+  navCloseEls.forEach((el) => {
+    el.addEventListener("click", closeMobileNav);
+  });
+
+  mobileNavDrawer?.querySelectorAll(".mobile-nav-link").forEach((a) => {
     a.addEventListener("click", closeMobileNav);
   });
 

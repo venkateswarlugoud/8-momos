@@ -46,10 +46,10 @@
           class="menu-toggle"
           type="button"
           aria-label="Toggle navigation"
-          aria-controls="primaryNav"
+          aria-controls="mobileNavDrawer"
           aria-expanded="false"
         >
-          Menu
+          ☰
         </button>
 
         <nav class="nav" id="primaryNav" aria-label="Primary">
@@ -59,15 +59,19 @@
           <a class="nav-link" href="#contact">Contact</a>
         </nav>
 
-        <a
-          class="btn btn-primary header-cta"
-          href="https://wa.me/916304731856"
-          target="_blank"
-          rel="noopener"
-          data-whatsapp
-        >
-          Order on WhatsApp
-        </a>
+        <div class="mobile-nav-backdrop" data-nav-close></div>
+        <aside class="mobile-nav-drawer" id="mobileNavDrawer" aria-hidden="true" aria-label="Mobile navigation">
+          <div class="mobile-nav-head">
+            <p class="mobile-nav-title">Navigate</p>
+            <button class="mobile-nav-close" type="button" data-nav-close aria-label="Close menu">✕</button>
+          </div>
+          <nav class="mobile-nav-links" aria-label="Mobile primary">
+            <a class="mobile-nav-link" href="#menu">Menu</a>
+            <a class="mobile-nav-link" href="#why">Why us</a>
+            <a class="mobile-nav-link" href="#location">Location</a>
+            <a class="mobile-nav-link" href="#contact">Contact</a>
+          </nav>
+        </aside>
       </div>
     </header>
 
@@ -95,15 +99,6 @@
               <span class="badge">BTM favorite</span>
             </div>
             <div class="hero-actions">
-              <a
-                class="btn btn-primary btn-lg"
-                href="https://wa.me/916304731856"
-                target="_blank"
-                rel="noopener"
-                data-whatsapp
-              >
-                WhatsApp Order
-              </a>
               <a class="btn btn-ghost btn-lg" href="#menu">View Menu</a>
             </div>
             <p class="hero-note">
@@ -352,15 +347,7 @@
           </div>
 
           <div class="section-cta">
-            <a
-              class="btn btn-primary"
-              href="https://wa.me/916304731856"
-              target="_blank"
-              rel="noopener"
-              data-whatsapp
-            >
-              Order these on WhatsApp
-            </a>
+            <a class="btn btn-primary" href="#contact">Share order details</a>
             <p class="fineprint">
               Tip: Tell us your item + quantity + spice level.
             </p>
@@ -470,15 +457,7 @@
               </ul>
 
               <div class="contact-actions">
-                <a
-                  class="btn btn-primary"
-                  href="https://wa.me/916304731856"
-                  target="_blank"
-                  rel="noopener"
-                  data-whatsapp
-                >
-                  WhatsApp Order Now
-                </a>
+                <a class="btn btn-primary" href="tel:+916304731856">Call Now</a>
                 <a class="btn btn-ghost" href="#menu">See Menu</a>
               </div>
               <p class="fineprint">

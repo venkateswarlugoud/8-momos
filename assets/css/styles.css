@@ -1163,6 +1163,26 @@ body.mobile-nav-open .mobile-nav-drawer {
 }
 
 @media (max-width: 719px) {
+  .header-inner {
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .brand {
+    flex: 1 1 100%;
+  }
+
+  .nav {
+    flex: 1 1 100%;
+    margin-left: 0;
+    justify-content: flex-start;
+    gap: 6px;
+  }
+
+  .nav-link {
+    padding: 7px 9px;
+  }
+
   .wa-float {
     right: max(16px, env(safe-area-inset-right));
     bottom: calc(16px + env(safe-area-inset-bottom));

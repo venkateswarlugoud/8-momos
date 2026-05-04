@@ -1562,6 +1562,11 @@ body.mobile-nav-open .mobile-nav-drawer {
   font-weight: 800;
 }
 
+.mini-input.is-invalid {
+  border-color: rgba(185, 28, 28, 0.72);
+  background: rgba(254, 226, 226, 0.7);
+}
+
 .veg-select {
   border-width: 2px;
 }
@@ -1721,6 +1726,13 @@ body.mobile-nav-open .mobile-nav-drawer {
   color: #b91c1c;
 }
 
+.order-items-error {
+  margin: 8px 0 0;
+  font-size: 12px;
+  font-weight: 700;
+  color: #b91c1c;
+}
+
 #deliveryFields {
   display: none;
   gap: 8px;
@@ -1733,6 +1745,10 @@ body.mobile-nav-open .mobile-nav-drawer {
   justify-content: flex-end;
   background: rgba(255, 255, 255, 0.92);
   border-top: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+.order-foot .btn-ghost {
+  margin-right: auto;
 }
 
 @media (min-width: 720px) {

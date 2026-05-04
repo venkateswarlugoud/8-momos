@@ -229,9 +229,12 @@
         vegSel.addEventListener("change", () => {
           const value = /** @type {HTMLSelectElement} */ (vegSel).value;
           setVegType(id, value);
+          vegSel.classList.remove("is-invalid");
           vegSel.classList.remove("veg-select--veg", "veg-select--nonveg");
           if (value === "Veg") vegSel.classList.add("veg-select--veg");
           if (value === "Non-Veg") vegSel.classList.add("veg-select--nonveg");
+          const hasMissingType = state.items.some((it) => it.allowedVegTypes.length > 1 && !it.vegType);
+          if (!hasMissingType) clearItemsError();
         });
       }
     });
@@ -328,6 +331,28 @@
     if (errNode) errNode.textContent = "";
   }
 
+  function ensureItemsErrorNode() {
+    if (!itemsEl || !itemsEl.parentElement) return null;
+    let node = itemsEl.parentElement.querySelector("#orderItemsError");
+    if (node) return node;
+    node = document.createElement("p");
+    node.id = "orderItemsError";
+    node.className = "order-items-error";
+    node.setAttribute("aria-live", "polite");
+    itemsEl.parentElement.appendChild(node);
+    return node;
+  }
+
+  function setItemsError(message) {
+    const node = ensureItemsErrorNode();
+    if (node) node.textContent = message;
+  }
+
+  function clearItemsError() {
+    const node = document.getElementById("orderItemsError");
+    if (node) node.textContent = "";
+  }
+
   function validateOrderForm() {
     let valid = true;
     const name = (el.name?.value || "").trim();
@@ -336,6 +361,8 @@
     const address = (el.address?.value || "").trim();
 
     [el.name, el.phone, el.address].forEach(clearFieldError);
+    clearItemsError();
+    itemsEl?.querySelectorAll("[data-veg]").forEach((sel) => sel.classList.remove("is-invalid"));
 
     if (state.items.length === 0) {
       valid = false;
@@ -344,6 +371,22 @@
     } else {
       const emptyBox = document.getElementById("orderItemsEmpty");
       if (emptyBox) emptyBox.classList.remove("order-empty--error");
+    }
+
+    const itemsMissingType = state.items.filter((it) => it.allowedVegTypes.length > 1 && !it.vegType);
+    if (itemsMissingType.length > 0) {
+      valid = false;
+      setItemsError("Please select Veg or Non-Veg for all items.");
+      let firstInvalidSelect = null;
+      itemsMissingType.forEach((it) => {
+        const row = itemsEl?.querySelector(`.order-item[data-id="${it.id}"]`);
+        const sel = row?.querySelector("[data-veg]");
+        if (sel) {
+          sel.classList.add("is-invalid");
+          if (!firstInvalidSelect) firstInvalidSelect = sel;
+        }
+      });
+      if (firstInvalidSelect instanceof HTMLElement) firstInvalidSelect.focus();
     }
 
     if (!name) {

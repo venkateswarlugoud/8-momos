@@ -1272,7 +1272,7 @@ body.cart-has-items .wa-float {
 }
 
 body.cart-has-items .cart-badge {
-  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  bottom: calc(16px + env(safe-area-inset-bottom));
 }
 
 .cart-badge-label {

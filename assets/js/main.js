@@ -176,6 +176,7 @@
     const totalQty = state.items.reduce((sum, it) => sum + it.qty, 0);
     cartBadgeCount.textContent = String(totalQty);
     cartBadge.hidden = totalQty === 0;
+    document.body.classList.toggle("cart-has-items", totalQty > 0);
   }
 
   function renderItems() {

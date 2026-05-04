@@ -1255,6 +1255,15 @@ body.mobile-nav-open .mobile-nav-drawer {
   display: none;
 }
 
+/* Hide redundant WhatsApp chip while cart is in use; dock cart to bottom corner */
+body.cart-has-items .wa-float {
+  display: none;
+}
+
+body.cart-has-items .cart-badge {
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+}
+
 .cart-badge-label {
   font-size: 13px;
   font-weight: 800;

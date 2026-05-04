@@ -152,9 +152,16 @@
       itemsEl.innerHTML = `
         <div class="order-empty" id="orderItemsEmpty">
           <p class="order-empty-title">No items yet</p>
-          <p class="order-empty-text">Tap any item name in the menu to add it here.</p>
+          <p class="order-empty-text">Tap any menu item to add it to your order.</p>
+          <button class="btn btn-primary order-empty-add" type="button" id="orderEmptyAddBtn">+ Add items</button>
         </div>
       `;
+      const addBtn = document.getElementById("orderEmptyAddBtn");
+      addBtn?.addEventListener("click", () => {
+        closeDrawer();
+        const menuSection = document.getElementById("menu");
+        menuSection?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
       return;
     }
 

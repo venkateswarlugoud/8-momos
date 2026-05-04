@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="8 Momo's logo">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ff7a18" />
+      <stop offset="100%" stop-color="#d6402b" />
+    </linearGradient>
+    <linearGradient id="steam" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.45" />
+    </linearGradient>
+  </defs>
+
+  <rect x="6" y="6" width="116" height="116" rx="30" fill="url(#bg)" />
+
+  <g fill="none" stroke="url(#steam)" stroke-linecap="round" stroke-width="5">
+    <path d="M46 34c-5 5-5 12 0 17" />
+    <path d="M64 29c-6 6-6 15 0 22" />
+    <path d="M82 34c5 5 5 12 0 17" />
+  </g>
+
+  <g fill="#fff">
+    <circle cx="64" cy="72" r="28" opacity="0.18" />
+    <text
+      x="64"
+      y="84"
+      text-anchor="middle"
+      font-family="Inter, Arial, sans-serif"
+      font-size="44"
+      font-weight="800"
+      letter-spacing="-1"
+      fill="#ffffff"
+    >
+      8
+    </text>
+  </g>
+</svg>

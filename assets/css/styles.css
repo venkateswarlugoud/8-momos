@@ -1239,7 +1239,7 @@ body.mobile-nav-open .mobile-nav-drawer {
   position: fixed;
   right: 16px;
   bottom: 84px;
-  z-index: 9998;
+  z-index: 10000;
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -1249,6 +1249,17 @@ body.mobile-nav-open .mobile-nav-drawer {
   box-shadow: 0 10px 24px rgba(15, 23, 42, 0.18);
   padding: 8px 12px;
   cursor: pointer;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.cart-badge-icon {
+  display: none;
+}
+
+.cart-badge-label-mobile {
+  display: none;
 }
 
 .cart-badge[hidden] {
@@ -1312,8 +1323,67 @@ body.cart-has-items .cart-badge {
   }
 
   .cart-badge {
-    right: max(16px, env(safe-area-inset-right));
+    right: max(12px, env(safe-area-inset-right));
     bottom: calc(76px + env(safe-area-inset-bottom));
+    left: auto;
+    min-height: 56px;
+    padding: 10px 18px 10px 12px;
+    gap: 12px;
+    border-radius: 18px;
+    border: 1px solid rgba(214, 64, 43, 0.28);
+    background: linear-gradient(180deg, #ffffff 0%, #fffbf8 100%);
+    box-shadow:
+      0 20px 46px rgba(15, 23, 42, 0.24),
+      0 10px 22px rgba(214, 64, 43, 0.14),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  }
+
+  .cart-badge-icon {
+    display: grid;
+    place-items: center;
+    flex: 0 0 auto;
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    background: linear-gradient(145deg, rgba(214, 64, 43, 0.16), rgba(241, 143, 1, 0.14));
+    color: var(--accent);
+  }
+
+  .cart-badge-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .cart-badge-label-desktop {
+    display: none;
+  }
+
+  .cart-badge-label-mobile {
+    display: inline;
+  }
+
+  .cart-badge-label {
+    font-size: 16px;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+  }
+
+  .cart-badge-count {
+    min-width: 36px;
+    height: 36px;
+    padding: 0 10px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 900;
+    box-shadow: 0 4px 12px rgba(214, 64, 43, 0.28);
+  }
+
+  .cart-badge:active {
+    transform: scale(0.98);
+  }
+
+  .site-footer {
+    padding-bottom: 108px;
   }
 
   body.order-drawer-open .wa-float {
@@ -1457,7 +1527,8 @@ body.cart-has-items .cart-badge {
 
   .btn,
   .menu-card,
-  .wa-float {
+  .wa-float,
+  .cart-badge {
     transition: none;
   }
 }

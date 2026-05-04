@@ -10,9 +10,14 @@
 
   // ----- Order drawer state + UI -----
   const drawer = document.getElementById("orderDrawer");
+  const drawerPanel = drawer?.querySelector(".order-panel");
   const itemsEl = document.getElementById("orderItems");
   const clearBtn = document.getElementById("orderClearBtn");
   const waBtn = document.getElementById("orderWhatsAppBtn");
+  let lastFocusedEl = null;
+
+  const focusableSelector =
+    "a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex='-1'])";
 
   const el = {
     fulfillment: () => document.querySelector("input[name='fulfillment']:checked")?.value || "Pickup",
@@ -35,11 +40,14 @@
 
   function openDrawer() {
     if (!drawer) return;
+    lastFocusedEl = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     drawer.classList.add("open");
     drawer.setAttribute("aria-hidden", "false");
     document.documentElement.style.overflow = "hidden";
     document.body.style.overflow = "hidden";
     updateDeliveryVisibility();
+    const firstFocusable = drawer.querySelector(focusableSelector);
+    if (firstFocusable instanceof HTMLElement) firstFocusable.focus();
   }
 
   function closeDrawer() {
@@ -48,6 +56,7 @@
     drawer.setAttribute("aria-hidden", "true");
     document.documentElement.style.overflow = "";
     document.body.style.overflow = "";
+    if (lastFocusedEl) lastFocusedEl.focus();
   }
 
   function updateDeliveryVisibility() {
@@ -343,9 +352,9 @@
     if (!phone) {
       valid = false;
       setFieldError(el.phone, "Please enter your phone number");
-    } else if (!/^\d{10}$/.test(phone.replace(/\s+/g, ""))) {
+    } else if (!/^(\+?91)?[6-9]\d{9}$/.test(phone.replace(/[^\d+]/g, ""))) {
       valid = false;
-      setFieldError(el.phone, "Enter a valid 10-digit phone number");
+      setFieldError(el.phone, "Enter a valid Indian mobile number");
     }
 
     if (fulfillment === "Delivery" && !address) {
@@ -374,6 +383,20 @@
 
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape" && drawer.classList.contains("open")) closeDrawer();
+      if (e.key !== "Tab" || !drawer.classList.contains("open") || !drawerPanel) return;
+
+      const focusables = drawerPanel.querySelectorAll(focusableSelector);
+      if (focusables.length === 0) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        if (last instanceof HTMLElement) last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        if (first instanceof HTMLElement) first.focus();
+      }
     });
 
     document.querySelectorAll("input[name='fulfillment']").forEach((r) => {
@@ -451,7 +474,6 @@
     };
 
     const attach = (node) => {
-      node.setAttribute("role", "button");
       node.setAttribute("tabindex", "0");
       node.setAttribute("data-quick-order", "true");
 
@@ -490,7 +512,6 @@
 
     e.preventDefault();
     target.scrollIntoView({ behavior: "smooth", block: "start" });
-    history.pushState(null, "", href);
   });
 })();
 

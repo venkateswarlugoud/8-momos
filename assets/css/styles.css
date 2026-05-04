@@ -155,22 +155,12 @@ a {
   text-overflow: ellipsis;
 }
 
-.menu-toggle {
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
-  border: 1px solid rgba(15, 23, 42, 0.14);
-  background: rgba(255, 255, 255, 0.92);
-  display: grid;
-  place-items: center;
-  font-size: 20px;
-  line-height: 1;
-  cursor: pointer;
-  color: rgba(15, 23, 42, 0.86);
-}
-
 .nav {
-  display: none;
+  display: flex;
+  margin-left: auto;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 .nav-link {
@@ -1216,13 +1206,7 @@ body.mobile-nav-open .mobile-nav-drawer {
     flex-wrap: nowrap;
   }
 
-  .menu-toggle {
-    display: none;
-  }
-
   .nav {
-    display: flex;
-    margin-left: auto;
     gap: 14px;
   }
 

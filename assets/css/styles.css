@@ -132,12 +132,6 @@ a {
   box-shadow: 0 10px 18px rgba(255, 59, 48, 0.2);
 }
 
-.brand-logo {
-  width: 22px;
-  height: 22px;
-  display: block;
-}
-
 .brand-text {
   display: grid;
   gap: 2px;
@@ -180,10 +174,6 @@ a {
 .nav-link:hover {
   background: rgba(15, 23, 42, 0.06);
   color: rgba(15, 23, 42, 0.9);
-}
-
-.nav-link--more {
-  display: inline-flex;
 }
 
 .mobile-nav-backdrop {
@@ -1193,10 +1183,6 @@ body.mobile-nav-open .mobile-nav-drawer {
     padding: 7px 9px;
   }
 
-  .nav-link--extra {
-    display: none;
-  }
-
   .wa-float {
     right: max(16px, env(safe-area-inset-right));
     bottom: calc(16px + env(safe-area-inset-bottom));
@@ -1259,10 +1245,6 @@ body.mobile-nav-open .mobile-nav-drawer {
 
   .nav {
     gap: 14px;
-  }
-
-  .nav-link--more {
-    display: none;
   }
 
   .mobile-nav-backdrop,

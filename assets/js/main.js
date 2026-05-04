@@ -152,7 +152,7 @@
       itemsEl.innerHTML = `
         <div class="order-empty" id="orderItemsEmpty">
           <p class="order-empty-title">No items yet</p>
-          <p class="order-empty-text">Tap any menu item to add it.</p>
+          <p class="order-empty-text">Tap any item name in the menu to add it here.</p>
         </div>
       `;
       return;

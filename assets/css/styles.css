@@ -641,6 +641,23 @@ body.mobile-nav-open .mobile-nav-drawer {
   border-radius: 999px;
 }
 
+.menu-helper {
+  margin-bottom: 12px;
+  padding: 12px;
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.9);
+  display: grid;
+  gap: 10px;
+}
+
+.menu-helper-text {
+  margin: 0;
+  color: rgba(15, 23, 42, 0.76);
+  font-weight: 600;
+  font-size: 14px;
+}
+
 .chip {
   scroll-snap-align: start;
   flex: 0 0 auto;
@@ -1226,6 +1243,11 @@ body.mobile-nav-open .mobile-nav-drawer {
   .menu-premium {
     grid-template-columns: 1fr 1fr;
     gap: 16px;
+  }
+
+  .menu-helper {
+    grid-template-columns: 1fr auto;
+    align-items: center;
   }
 
   .menu-cardx {

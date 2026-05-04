@@ -1323,9 +1323,11 @@ body.cart-has-items .cart-badge {
   }
 
   .cart-badge {
+    left: max(12px, env(safe-area-inset-left));
     right: max(12px, env(safe-area-inset-right));
-    bottom: calc(76px + env(safe-area-inset-bottom));
-    left: auto;
+    bottom: calc(12px + env(safe-area-inset-bottom));
+    justify-content: space-between;
+    width: auto;
     min-height: 56px;
     padding: 10px 18px 10px 12px;
     gap: 12px;

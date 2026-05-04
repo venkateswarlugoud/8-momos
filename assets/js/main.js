@@ -43,6 +43,7 @@
     lastFocusedEl = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     drawer.classList.add("open");
     drawer.setAttribute("aria-hidden", "false");
+    document.body.classList.add("order-drawer-open");
     document.documentElement.style.overflow = "hidden";
     document.body.style.overflow = "hidden";
     updateDeliveryVisibility();
@@ -54,6 +55,7 @@
     if (!drawer) return;
     drawer.classList.remove("open");
     drawer.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("order-drawer-open");
     document.documentElement.style.overflow = "";
     document.body.style.overflow = "";
     if (lastFocusedEl) lastFocusedEl.focus();

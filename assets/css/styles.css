@@ -1196,6 +1196,12 @@ body.mobile-nav-open .mobile-nav-drawer {
     width: auto;
   }
 
+  body.order-drawer-open .wa-float {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(14px);
+  }
+
   .wa-icon {
     width: 30px;
     height: 30px;

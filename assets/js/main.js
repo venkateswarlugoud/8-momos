@@ -8,10 +8,22 @@
     return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
   }
 
+  function trackEvent(name, params = {}) {
+    if (typeof window.gtag === "function") {
+      window.gtag("event", name, params);
+      return;
+    }
+    if (Array.isArray(window.dataLayer)) {
+      window.dataLayer.push({ event: name, ...params });
+    }
+  }
+
   // ----- Order drawer state + UI -----
   const drawer = document.getElementById("orderDrawer");
   const drawerPanel = drawer?.querySelector(".order-panel");
   const itemsEl = document.getElementById("orderItems");
+  const cartBadge = document.getElementById("cartBadge");
+  const cartBadgeCount = document.getElementById("cartBadgeCount");
   const clearBtn = document.getElementById("orderClearBtn");
   const waBtn = document.getElementById("orderWhatsAppBtn");
   let lastFocusedEl = null;
@@ -40,6 +52,7 @@
 
   function openDrawer() {
     if (!drawer) return;
+    const wasClosed = !drawer.classList.contains("open");
     lastFocusedEl = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     drawer.classList.add("open");
     drawer.setAttribute("aria-hidden", "false");
@@ -47,6 +60,7 @@
     document.documentElement.style.overflow = "hidden";
     document.body.style.overflow = "hidden";
     updateDeliveryVisibility();
+    if (wasClosed) trackEvent("drawer_opened", { source: "site" });
     const firstFocusable = drawer.querySelector(focusableSelector);
     if (firstFocusable instanceof HTMLElement) firstFocusable.focus();
   }
@@ -87,6 +101,7 @@
         allowedVegTypes: normalizedAllowed,
       });
     }
+    trackEvent("item_added", { item_name: safeName, item_type_options: normalizedAllowed.join("/") });
     renderItems();
     openDrawer();
   }
@@ -156,8 +171,16 @@
     return `<span class="${klass}" aria-label="Food type">${type}</span>`;
   }
 
+  function updateCartBadge() {
+    if (!cartBadge || !cartBadgeCount) return;
+    const totalQty = state.items.reduce((sum, it) => sum + it.qty, 0);
+    cartBadgeCount.textContent = String(totalQty);
+    cartBadge.hidden = totalQty === 0;
+  }
+
   function renderItems() {
     if (!itemsEl) return;
+    updateCartBadge();
 
     if (state.items.length === 0) {
       itemsEl.innerHTML = `
@@ -449,10 +472,15 @@
     });
 
     clearBtn?.addEventListener("click", clearAll);
+    cartBadge?.addEventListener("click", openDrawer);
 
     waBtn?.addEventListener("click", () => {
       if (!validateOrderForm()) return;
       const text = buildWhatsAppText();
+      trackEvent("whatsapp_clicked", {
+        source: "order_drawer",
+        item_count: state.items.reduce((sum, it) => sum + it.qty, 0),
+      });
       window.open(whatsappHref(text), "_blank", "noopener,noreferrer");
     });
 

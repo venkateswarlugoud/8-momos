@@ -2,7 +2,7 @@
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
-  const WHATSAPP_NUMBER = "916304731856";
+  const WHATSAPP_NUMBER = "918167649958";
 
   function whatsappHref(text) {
     return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;

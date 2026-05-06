@@ -1020,10 +1020,15 @@ body.mobile-nav-open .mobile-nav-drawer {
 }
 
 @media (hover: none) {
-  .menu-matrix-row:not(.menu-matrix-head)[data-quick-order="true"]:hover,
-  .menu-item[data-quick-order="true"]:hover {
-    transform: none;
-    padding-bottom: 0;
+  .menu-matrix-row:not(.menu-matrix-head)[data-quick-order="true"],
+  .menu-item[data-quick-order="true"] {
+    padding-bottom: 44px;
+  }
+
+  .menu-matrix-row:not(.menu-matrix-head)[data-quick-order="true"]::after,
+  .menu-item[data-quick-order="true"]::after {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 

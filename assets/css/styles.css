@@ -33,6 +33,7 @@ html {
 body {
   margin: 0;
   font-family:
+    Poppins,
     Inter,
     system-ui,
     -apple-system,
@@ -907,8 +908,42 @@ body.mobile-nav-open .mobile-nav-drawer {
 
 .tag-special {
   border-color: rgba(241, 143, 1, 0.26);
-  background: linear-gradient(135deg, rgba(241, 143, 1, 0.14), rgba(214, 64, 43, 0.10));
-  color: rgba(15, 23, 42, 0.74);
+  background: transparent;
+  color: rgba(15, 23, 42, 0.72);
+}
+
+.menu-cardx-title::after {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-left: 6px;
+  vertical-align: -2px;
+  opacity: 0.62;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230f172a' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 10c0-2.2 1.8-4 4-4 .4-1.7 1.9-3 3.8-3 2.2 0 4 1.8 4 4v1h1a2 2 0 0 1 0 4H5a2 2 0 0 1 0-4h1v2Z'/%3E%3Cpath d='M7 12v4c0 2.2 1.8 4 4 4h2c2.2 0 4-1.8 4-4v-4'/%3E%3C/svg%3E");
+}
+
+#momos .menu-cardx-title::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230f172a' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12c0-3.8 3.6-7 8-7s8 3.2 8 7c0 4.2-3.6 7-8 7s-8-2.8-8-7Z'/%3E%3Cpath d='M8 11c1.1-1.7 2.5-2.5 4-2.5s2.9.8 4 2.5'/%3E%3C/svg%3E");
+}
+
+#paneer-momos .menu-cardx-title::after,
+#starters .menu-cardx-title::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230f172a' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 10l8-6 8 6v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8Z'/%3E%3Cpath d='M8 14h8'/%3E%3C/svg%3E");
+}
+
+#rice .menu-cardx-title::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230f172a' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 15h18a7 7 0 0 1-7 6H10a7 7 0 0 1-7-6Z'/%3E%3Cpath d='M7 11v2M11 10v3M15 9v4M19 10v3'/%3E%3C/svg%3E");
+}
+
+#noodles .menu-cardx-title::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230f172a' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12h16'/%3E%3Cpath d='M6 8h12M5 16h14'/%3E%3Cpath d='M9 5l1 3M14 5l1 3'/%3E%3C/svg%3E");
+}
+
+#soup .menu-cardx-title::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230f172a' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12h16v2a6 6 0 0 1-6 6h-4a6 6 0 0 1-6-6v-2Z'/%3E%3Cpath d='M8 8c0-1 1-1.4 1-2.4M12 8c0-1 1-1.4 1-2.4M16 8c0-1 1-1.4 1-2.4'/%3E%3C/svg%3E");
 }
 
 .menu-matrix {
@@ -942,8 +977,7 @@ body.mobile-nav-open .mobile-nav-drawer {
     transform 160ms ease,
     box-shadow 160ms ease,
     border-color 160ms ease,
-    background 160ms ease,
-    padding-bottom 160ms ease;
+    background 160ms ease;
 }
 
 /* Keep content above hover sheen */
@@ -953,28 +987,59 @@ body.mobile-nav-open .mobile-nav-drawer {
   z-index: 2;
 }
 
-.menu-matrix-row:not(.menu-matrix-head)[data-quick-order="true"]::after,
-.menu-item[data-quick-order="true"]::after {
-  content: "Tap to add";
-  position: absolute;
-  left: 12px;
-  bottom: 10px;
-  z-index: 1;
-  font-size: 10px;
-  font-weight: 900;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  padding: 4px 8px;
+.menu-matrix-row:not(.menu-matrix-head)[data-quick-order="true"] > div:first-child,
+.menu-item[data-quick-order="true"] .mi-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.menu-matrix-row:not(.menu-matrix-head)[data-quick-order="true"] > div:first-child::after {
+  content: "ADD +";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 46px;
+  height: 20px;
+  padding: 0 7px;
   border-radius: 999px;
-  border: 1px solid rgba(214, 64, 43, 0.18);
-  background: rgba(255, 255, 255, 0.82);
-  color: rgba(214, 64, 43, 0.9);
-  opacity: 0;
-  transform: translateY(6px);
-  transition:
-    opacity 140ms ease,
-    transform 140ms ease;
-  pointer-events: none;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.03em;
+  border: 1px solid rgba(241, 143, 1, 0.34);
+  background: rgba(241, 143, 1, 0.12);
+  color: rgba(214, 64, 43, 0.95);
+  flex: 0 0 auto;
+}
+
+/* Keep list cards clean and avoid clipping prices */
+.menu-item[data-quick-order="true"] {
+  padding-right: 66px;
+}
+
+.menu-item[data-quick-order="true"] .mi-name::after {
+  content: none;
+}
+
+.menu-item[data-quick-order="true"]::after {
+  content: "ADD +";
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 46px;
+  height: 20px;
+  padding: 0 7px;
+  border-radius: 999px;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.03em;
+  border: 1px solid rgba(241, 143, 1, 0.34);
+  background: rgba(241, 143, 1, 0.12);
+  color: rgba(214, 64, 43, 0.95);
 }
 
 .menu-matrix-row:not(.menu-matrix-head)[data-quick-order="true"]::before,
@@ -996,15 +1061,14 @@ body.mobile-nav-open .mobile-nav-drawer {
   border-color: rgba(214, 64, 43, 0.22);
   box-shadow: 0 18px 38px rgba(15, 23, 42, 0.08);
   background: rgba(255, 248, 243, 0.82);
-  padding-bottom: 44px; /* create space only on hover */
 }
 
-.menu-matrix-row:not(.menu-matrix-head)[data-quick-order="true"]:hover::after,
+.menu-matrix-row:not(.menu-matrix-head)[data-quick-order="true"]:hover > div:first-child::after,
 .menu-item[data-quick-order="true"]:hover::after,
-.menu-matrix-row:not(.menu-matrix-head)[data-quick-order="true"]:focus-visible::after,
+.menu-matrix-row:not(.menu-matrix-head)[data-quick-order="true"]:focus-visible > div:first-child::after,
 .menu-item[data-quick-order="true"]:focus-visible::after {
-  opacity: 1;
-  transform: translateY(0);
+  border-color: rgba(214, 64, 43, 0.32);
+  background: rgba(241, 143, 1, 0.2);
 }
 
 .menu-matrix-row:not(.menu-matrix-head)[data-quick-order="true"]:hover::before,
@@ -1020,28 +1084,9 @@ body.mobile-nav-open .mobile-nav-drawer {
 }
 
 @media (hover: none) {
-  /* On touch devices: keep UI clean by default */
-  .menu-matrix-row:not(.menu-matrix-head)[data-quick-order="true"],
-  .menu-item[data-quick-order="true"] {
-    padding-bottom: 0;
-  }
-
-  .menu-matrix-row:not(.menu-matrix-head)[data-quick-order="true"]::after,
-  .menu-item[data-quick-order="true"]::after {
-    opacity: 0;
-    transform: translateY(6px);
-  }
-
-  /* But show the hint briefly (learnability) */
-  body.show-tap-hint .menu-matrix-row:not(.menu-matrix-head)[data-quick-order="true"],
-  body.show-tap-hint .menu-item[data-quick-order="true"] {
-    padding-bottom: 44px;
-  }
-
-  body.show-tap-hint .menu-matrix-row:not(.menu-matrix-head)[data-quick-order="true"]::after,
-  body.show-tap-hint .menu-item[data-quick-order="true"]::after {
-    opacity: 1;
-    transform: translateY(0);
+  .menu-matrix-row:not(.menu-matrix-head)[data-quick-order="true"]:hover,
+  .menu-item[data-quick-order="true"]:hover {
+    transform: none;
   }
 }
 
@@ -1049,7 +1094,6 @@ body.mobile-nav-open .mobile-nav-drawer {
 .menu-item[data-quick-order="true"]:focus-visible {
   outline: 3px solid rgba(214, 64, 43, 0.35);
   outline-offset: 2px;
-  padding-bottom: 44px; /* create space only on keyboard focus */
 }
 
 .menu-matrix-head {
@@ -1079,6 +1123,12 @@ body.mobile-nav-open .mobile-nav-drawer {
 .menu-matrix-row > div:nth-child(3) {
   text-align: right;
   font-weight: 900;
+}
+
+.menu-matrix-row > div:first-child {
+  font-family: Nunito, Poppins, Inter, system-ui, sans-serif;
+  font-weight: 500;
+  color: rgba(15, 23, 42, 0.84);
 }
 
 .menu-matrix-row > div:nth-child(2) {
@@ -1117,8 +1167,10 @@ body.mobile-nav-open .mobile-nav-drawer {
 }
 
 .mi-name {
-  font-weight: 700;
+  font-family: Nunito, Poppins, Inter, system-ui, sans-serif;
+  font-weight: 500;
   letter-spacing: -0.01em;
+  color: rgba(15, 23, 42, 0.84);
 }
 
 .mi-dots {

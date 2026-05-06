@@ -18,22 +18,6 @@
     }
   }
 
-  // Touch devices: show "Tap to add" hint briefly (first time).
-  try {
-    const isTouchUi = typeof window.matchMedia === "function" && window.matchMedia("(hover: none)").matches;
-    if (isTouchUi) {
-      const key = "tapHintSeen_v1";
-      const seen = localStorage.getItem(key) === "1";
-      if (!seen) {
-        document.body.classList.add("show-tap-hint");
-        window.setTimeout(() => document.body.classList.remove("show-tap-hint"), 1800);
-        localStorage.setItem(key, "1");
-      }
-    }
-  } catch {
-    // ignore
-  }
-
   // ----- Order drawer state + UI -----
   const drawer = document.getElementById("orderDrawer");
   const drawerPanel = drawer?.querySelector(".order-panel");

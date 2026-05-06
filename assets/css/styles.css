@@ -1020,13 +1020,26 @@ body.mobile-nav-open .mobile-nav-drawer {
 }
 
 @media (hover: none) {
+  /* On touch devices: keep UI clean by default */
   .menu-matrix-row:not(.menu-matrix-head)[data-quick-order="true"],
   .menu-item[data-quick-order="true"] {
-    padding-bottom: 44px;
+    padding-bottom: 0;
   }
 
   .menu-matrix-row:not(.menu-matrix-head)[data-quick-order="true"]::after,
   .menu-item[data-quick-order="true"]::after {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  /* But show the hint briefly (learnability) */
+  body.show-tap-hint .menu-matrix-row:not(.menu-matrix-head)[data-quick-order="true"],
+  body.show-tap-hint .menu-item[data-quick-order="true"] {
+    padding-bottom: 44px;
+  }
+
+  body.show-tap-hint .menu-matrix-row:not(.menu-matrix-head)[data-quick-order="true"]::after,
+  body.show-tap-hint .menu-item[data-quick-order="true"]::after {
     opacity: 1;
     transform: translateY(0);
   }

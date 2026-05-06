@@ -436,6 +436,11 @@ body.mobile-nav-open .mobile-nav-drawer {
   box-shadow: 0 0 0 4px rgba(52, 211, 153, 0.16);
 }
 
+.dot.dot--closed {
+  background: #fb7185;
+  box-shadow: 0 0 0 4px rgba(251, 113, 133, 0.16);
+}
+
 .hero-title {
   margin: 0 0 8px;
   font-family: "Playfair Display", ui-serif, Georgia, serif;

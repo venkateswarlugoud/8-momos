@@ -30,7 +30,7 @@
         "name": "8 Momo's - BTM",
         "url": "https://8momos.vercel.app/",
         "image": "https://8momos.vercel.app/assets/img/logo-8momos.svg",
-        "telephone": "+91 81676 49958",
+        "telephone": "+91 63637 03988",
         "priceRange": "INR 100-400",
         "servesCuisine": ["Momos", "Chinese", "Fast Food"],
         "address": {
@@ -58,8 +58,8 @@
               "Saturday",
               "Sunday"
             ],
-            "opens": "12:00",
-            "closes": "23:00"
+            "opens": "13:00",
+            "closes": "22:30"
           }
         ],
         "sameAs": ["https://maps.app.goo.gl/kovxT24w6uJ1zgNX6?g_st=ac"]
@@ -105,9 +105,9 @@
         <div class="hero-sheen" aria-hidden="true"></div>
         <div class="container hero-inner">
           <div class="hero-card">
-            <p class="pill">
-              <span class="dot" aria-hidden="true"></span>
-              Open for takeaway & delivery
+            <p class="pill" id="openPill" aria-live="polite">
+              <span class="dot" id="openDot" aria-hidden="true"></span>
+              <span id="openText">Open for takeaway &amp; delivery</span>
             </p>
             <p class="hero-eyebrow">Momo &amp; Chinese</p>
             <h1 class="hero-title">8 Momo's</h1>
@@ -137,7 +137,7 @@
             <div class="hero-actions">
               <a
                 class="btn btn-whatsapp btn-lg"
-                href="https://wa.me/918167649958"
+                href="https://wa.me/916363703988"
                 target="_blank"
                 rel="noopener"
                 data-whatsapp
@@ -188,7 +188,7 @@
             </p>
             <a
               class="btn btn-ghost"
-              href="https://wa.me/918167649958"
+              href="https://wa.me/916363703988"
               data-whatsapp
             >
               Open Quick Order
@@ -217,25 +217,25 @@
                 </div>
 
                 <div class="menu-matrix-row" role="row">
-                  <div role="cell">Steam Momos</div><div role="cell">₹60</div><div role="cell">₹70</div>
+                  <div role="cell">Steam Momos</div><div role="cell">₹70</div><div role="cell">₹90</div>
                 </div>
                 <div class="menu-matrix-row" role="row">
-                  <div role="cell">Fried Momos</div><div role="cell">₹70</div><div role="cell">₹80</div>
+                  <div role="cell">Fried Momos</div><div role="cell">₹80</div><div role="cell">₹100</div>
                 </div>
                 <div class="menu-matrix-row" role="row">
-                  <div role="cell">Kurkura Momos</div><div role="cell">₹90</div><div role="cell">₹100</div>
+                  <div role="cell">Kurkura Momos</div><div role="cell">₹100</div><div role="cell">₹120</div>
                 </div>
                 <div class="menu-matrix-row" role="row">
-                  <div role="cell">Manchurian Momos</div><div role="cell">₹110</div><div role="cell">₹120</div>
+                  <div role="cell">Manchurian Momos</div><div role="cell">₹120</div><div role="cell">₹140</div>
                 </div>
                 <div class="menu-matrix-row" role="row">
-                  <div role="cell">Chilly Momos</div><div role="cell">₹120</div><div role="cell">₹130</div>
+                  <div role="cell">Chilly Momos</div><div role="cell">₹130</div><div role="cell">₹150</div>
                 </div>
                 <div class="menu-matrix-row" role="row">
-                  <div role="cell">Schezwan Momos</div><div role="cell">₹130</div><div role="cell">₹140</div>
+                  <div role="cell">Schezwan Momos</div><div role="cell">₹140</div><div role="cell">₹160</div>
                 </div>
                 <div class="menu-matrix-row" role="row">
-                  <div role="cell">Barbeque Momos</div><div role="cell">₹130</div><div role="cell">₹140</div>
+                  <div role="cell">Barbeque Momos</div><div role="cell">₹140</div><div role="cell">₹160</div>
                 </div>
               </div>
             </section>
@@ -252,13 +252,13 @@
                 <span class="tag">Veg</span>
               </header>
               <div class="menu-list" role="list">
-                <div class="menu-item" role="listitem"><span class="mi-name">Paneer Momos</span><span class="mi-dots" aria-hidden="true"></span><span class="mi-price">₹70</span></div>
-                <div class="menu-item" role="listitem"><span class="mi-name">Paneer Fried Momos</span><span class="mi-dots" aria-hidden="true"></span><span class="mi-price">₹80</span></div>
-                <div class="menu-item" role="listitem"><span class="mi-name">Paneer Kurkure Momos</span><span class="mi-dots" aria-hidden="true"></span><span class="mi-price">₹100</span></div>
-                <div class="menu-item" role="listitem"><span class="mi-name">Paneer Manchurian Momos</span><span class="mi-dots" aria-hidden="true"></span><span class="mi-price">₹130</span></div>
-                <div class="menu-item" role="listitem"><span class="mi-name">Paneer Barbeque Momos</span><span class="mi-dots" aria-hidden="true"></span><span class="mi-price">₹140</span></div>
-                <div class="menu-item" role="listitem"><span class="mi-name">Paneer Chilli Momos</span><span class="mi-dots" aria-hidden="true"></span><span class="mi-price">₹140</span></div>
-                <div class="menu-item" role="listitem"><span class="mi-name">Paneer Schezwan Momos</span><span class="mi-dots" aria-hidden="true"></span><span class="mi-price">₹140</span></div>
+                <div class="menu-item" role="listitem"><span class="mi-name">Paneer Momos</span><span class="mi-dots" aria-hidden="true"></span><span class="mi-price">₹80</span></div>
+                <div class="menu-item" role="listitem"><span class="mi-name">Paneer Fried Momos</span><span class="mi-dots" aria-hidden="true"></span><span class="mi-price">₹90</span></div>
+                <div class="menu-item" role="listitem"><span class="mi-name">Paneer Kurkure Momos</span><span class="mi-dots" aria-hidden="true"></span><span class="mi-price">₹110</span></div>
+                <div class="menu-item" role="listitem"><span class="mi-name">Paneer Manchurian Momos</span><span class="mi-dots" aria-hidden="true"></span><span class="mi-price">₹140</span></div>
+                <div class="menu-item" role="listitem"><span class="mi-name">Paneer Barbeque Momos</span><span class="mi-dots" aria-hidden="true"></span><span class="mi-price">₹150</span></div>
+                <div class="menu-item" role="listitem"><span class="mi-name">Paneer Chilli Momos</span><span class="mi-dots" aria-hidden="true"></span><span class="mi-price">₹150</span></div>
+                <div class="menu-item" role="listitem"><span class="mi-name">Paneer Schezwan Momos</span><span class="mi-dots" aria-hidden="true"></span><span class="mi-price">₹150</span></div>
               </div>
             </section>
 
@@ -281,25 +281,25 @@
                   <div role="columnheader">Non‑Veg</div>
                 </div>
                 <div class="menu-matrix-row" role="row">
-                  <div role="cell">Fried Rice</div><div role="cell">₹100</div><div role="cell">₹110</div>
+                  <div role="cell">Fried Rice</div><div role="cell">₹110</div><div role="cell">₹130</div>
                 </div>
                 <div class="menu-matrix-row" role="row">
-                  <div role="cell">Schezwan Fried Rice</div><div role="cell">₹110</div><div role="cell">₹130</div>
+                  <div role="cell">Schezwan Fried Rice</div><div role="cell">₹120</div><div role="cell">₹150</div>
                 </div>
                 <div class="menu-matrix-row" role="row">
-                  <div role="cell">Chilli Garlic Fried Rice</div><div role="cell">₹110</div><div role="cell">₹130</div>
+                  <div role="cell">Chilli Garlic Fried Rice</div><div role="cell">₹120</div><div role="cell">₹150</div>
                 </div>
                 <div class="menu-matrix-row" role="row">
-                  <div role="cell">Paneer Fried Rice</div><div role="cell">₹120</div><div role="cell"><span class="price-muted">—</span></div>
+                  <div role="cell">Paneer Fried Rice</div><div role="cell">₹130</div><div role="cell"><span class="price-muted">—</span></div>
                 </div>
                 <div class="menu-matrix-row" role="row">
-                  <div role="cell">Paneer Schezwan Fried Rice</div><div role="cell">₹130</div><div role="cell"><span class="price-muted">—</span></div>
+                  <div role="cell">Paneer Schezwan Fried Rice</div><div role="cell">₹140</div><div role="cell"><span class="price-muted">—</span></div>
                 </div>
                 <div class="menu-matrix-row" role="row">
-                  <div role="cell">Brown Garlic Fried Rice</div><div role="cell"><span class="price-muted">—</span></div><div role="cell">₹130</div>
+                  <div role="cell">Brown Garlic Fried Rice</div><div role="cell"><span class="price-muted">—</span></div><div role="cell">₹150</div>
                 </div>
                 <div class="menu-matrix-row" role="row">
-                  <div role="cell">Hot Garlic Fried Rice</div><div role="cell"><span class="price-muted">—</span></div><div role="cell">₹130</div>
+                  <div role="cell">Hot Garlic Fried Rice</div><div role="cell"><span class="price-muted">—</span></div><div role="cell">₹150</div>
                 </div>
               </div>
             </section>
@@ -323,31 +323,31 @@
                   <div role="columnheader">Non‑Veg</div>
                 </div>
                 <div class="menu-matrix-row" role="row">
-                  <div role="cell">Noodles</div><div role="cell">₹100</div><div role="cell">₹110</div>
+                  <div role="cell">Noodles</div><div role="cell">₹110</div><div role="cell">₹130</div>
                 </div>
                 <div class="menu-matrix-row" role="row">
-                  <div role="cell">Hakka Noodles</div><div role="cell">₹110</div><div role="cell">₹120</div>
+                  <div role="cell">Hakka Noodles</div><div role="cell">₹120</div><div role="cell">₹140</div>
                 </div>
                 <div class="menu-matrix-row" role="row">
-                  <div role="cell">Hot Garlic Noodles</div><div role="cell">₹120</div><div role="cell">₹120</div>
+                  <div role="cell">Hot Garlic Noodles</div><div role="cell">₹130</div><div role="cell">₹140</div>
                 </div>
                 <div class="menu-matrix-row" role="row">
-                  <div role="cell">Schezwan Noodles</div><div role="cell">₹120</div><div role="cell">₹120</div>
+                  <div role="cell">Schezwan Noodles</div><div role="cell">₹130</div><div role="cell">₹140</div>
                 </div>
                 <div class="menu-matrix-row" role="row">
-                  <div role="cell">Thukpa</div><div role="cell">₹100</div><div role="cell">₹120</div>
+                  <div role="cell">Thukpa</div><div role="cell">₹110</div><div role="cell">₹140</div>
                 </div>
                 <div class="menu-matrix-row" role="row">
-                  <div role="cell">Paneer Noodles</div><div role="cell">₹120</div><div role="cell"><span class="price-muted">—</span></div>
+                  <div role="cell">Paneer Noodles</div><div role="cell">₹130</div><div role="cell"><span class="price-muted">—</span></div>
                 </div>
                 <div class="menu-matrix-row" role="row">
-                  <div role="cell">Paneer Schezwan Noodles</div><div role="cell">₹130</div><div role="cell"><span class="price-muted">—</span></div>
+                  <div role="cell">Paneer Schezwan Noodles</div><div role="cell">₹140</div><div role="cell"><span class="price-muted">—</span></div>
                 </div>
                 <div class="menu-matrix-row" role="row">
-                  <div role="cell">Paneer Hakka Noodles</div><div role="cell">₹120</div><div role="cell"><span class="price-muted">—</span></div>
+                  <div role="cell">Paneer Hakka Noodles</div><div role="cell">₹130</div><div role="cell"><span class="price-muted">—</span></div>
                 </div>
                 <div class="menu-matrix-row" role="row">
-                  <div role="cell">Chow Mein</div><div role="cell"><span class="price-muted">—</span></div><div role="cell">₹120</div>
+                  <div role="cell">Chow Mein</div><div role="cell"><span class="price-muted">—</span></div><div role="cell">₹140</div>
                 </div>
               </div>
             </section>
@@ -371,10 +371,10 @@
                   <div role="columnheader">Non‑Veg</div>
                 </div>
                 <div class="menu-matrix-row" role="row">
-                  <div role="cell">Manchow Soup</div><div role="cell">₹70</div><div role="cell">₹80</div>
+                  <div role="cell">Manchow Soup</div><div role="cell">₹80</div><div role="cell">₹100</div>
                 </div>
                 <div class="menu-matrix-row" role="row">
-                  <div role="cell">Hot &amp; Sour Soup</div><div role="cell">₹70</div><div role="cell">₹80</div>
+                  <div role="cell">Hot &amp; Sour Soup</div><div role="cell">₹80</div><div role="cell">₹100</div>
                 </div>
               </div>
             </section>
@@ -394,19 +394,19 @@
 
               <div class="menu-two">
                 <div class="menu-list" role="list" aria-label="Veg and paneer items">
-                  <div class="menu-item" role="listitem"><span class="mi-name">Gobi Manchurian</span><span class="mi-dots" aria-hidden="true"></span><span class="mi-price">₹100</span></div>
-                  <div class="menu-item" role="listitem"><span class="mi-name">Gobi Schezwan Pepper Dry</span><span class="mi-dots" aria-hidden="true"></span><span class="mi-price">₹120</span></div>
-                  <div class="menu-item" role="listitem"><span class="mi-name">Paneer Chilli</span><span class="mi-dots" aria-hidden="true"></span><span class="mi-price">₹140</span></div>
-                  <div class="menu-item" role="listitem"><span class="mi-name">Paneer Manchurian</span><span class="mi-dots" aria-hidden="true"></span><span class="mi-price">₹130</span></div>
+                  <div class="menu-item" role="listitem"><span class="mi-name">Gobi Manchurian</span><span class="mi-dots" aria-hidden="true"></span><span class="mi-price">₹110</span></div>
+                  <div class="menu-item" role="listitem"><span class="mi-name">Gobi Schezwan Pepper Dry</span><span class="mi-dots" aria-hidden="true"></span><span class="mi-price">₹130</span></div>
+                  <div class="menu-item" role="listitem"><span class="mi-name">Paneer Chilli</span><span class="mi-dots" aria-hidden="true"></span><span class="mi-price">₹150</span></div>
+                  <div class="menu-item" role="listitem"><span class="mi-name">Paneer Manchurian</span><span class="mi-dots" aria-hidden="true"></span><span class="mi-price">₹140</span></div>
                 </div>
 
                 <div class="menu-list" role="list" aria-label="Chicken items">
-                  <div class="menu-item" role="listitem"><span class="mi-name">Chicken Kabab (Half)</span><span class="mi-dots" aria-hidden="true"></span><span class="mi-price">₹80</span></div>
-                  <div class="menu-item" role="listitem"><span class="mi-name">Chicken Kabab (Full)</span><span class="mi-dots" aria-hidden="true"></span><span class="mi-price">₹150</span></div>
-                  <div class="menu-item" role="listitem"><span class="mi-name">Chilli Chicken</span><span class="mi-dots" aria-hidden="true"></span><span class="mi-price">₹140</span></div>
-                  <div class="menu-item" role="listitem"><span class="mi-name">Chicken Manchurian</span><span class="mi-dots" aria-hidden="true"></span><span class="mi-price">₹140</span></div>
-                  <div class="menu-item" role="listitem"><span class="mi-name">Schezwan Chicken</span><span class="mi-dots" aria-hidden="true"></span><span class="mi-price">₹140</span></div>
-                  <div class="menu-item" role="listitem"><span class="mi-name">Lollipop (6 pc)</span><span class="mi-dots" aria-hidden="true"></span><span class="mi-price">₹160</span></div>
+                  <div class="menu-item" role="listitem"><span class="mi-name">Chicken Kabab (Half)</span><span class="mi-dots" aria-hidden="true"></span><span class="mi-price">₹100</span></div>
+                  <div class="menu-item" role="listitem"><span class="mi-name">Chicken Kabab (Full)</span><span class="mi-dots" aria-hidden="true"></span><span class="mi-price">₹180</span></div>
+                  <div class="menu-item" role="listitem"><span class="mi-name">Chilli Chicken</span><span class="mi-dots" aria-hidden="true"></span><span class="mi-price">₹160</span></div>
+                  <div class="menu-item" role="listitem"><span class="mi-name">Chicken Manchurian</span><span class="mi-dots" aria-hidden="true"></span><span class="mi-price">₹160</span></div>
+                  <div class="menu-item" role="listitem"><span class="mi-name">Schezwan Chicken</span><span class="mi-dots" aria-hidden="true"></span><span class="mi-price">₹160</span></div>
+                  <div class="menu-item" role="listitem"><span class="mi-name">Lollipop (6 pc)</span><span class="mi-dots" aria-hidden="true"></span><span class="mi-price">₹180</span></div>
                 </div>
               </div>
 
@@ -421,7 +421,7 @@
           <div class="section-cta">
             <a
               class="btn btn-primary"
-              href="https://wa.me/918167649958"
+              href="https://wa.me/916363703988"
               target="_blank"
               rel="noopener"
               data-whatsapp
@@ -520,7 +520,7 @@
               <ul class="contact-list">
                 <li>
                   <span class="contact-k">Phone</span>
-                  <a class="contact-v" href="tel:+918167649958">+91 81676 49958</a>
+                  <a class="contact-v" href="tel:+916363703988">+91 63637 03988</a>
                 </li>
                 <li>
                   <span class="contact-k">Address</span>
@@ -532,12 +532,12 @@
                 </li>
                 <li>
                   <span class="contact-k">Hours</span>
-                  <span class="contact-v">12:00 PM – 11:00 PM (daily)</span>
+                  <span class="contact-v">1:00 PM – 10:30 PM (daily)</span>
                 </li>
               </ul>
 
               <div class="contact-actions">
-                <a class="btn btn-primary" href="tel:+918167649958">Call Now</a>
+                <a class="btn btn-primary" href="tel:+916363703988">Call Now</a>
                 <a class="btn btn-ghost" href="#menu">See Menu</a>
               </div>
               <p class="fineprint">
@@ -577,7 +577,7 @@
 
     <a
       class="wa-float"
-      href="https://wa.me/918167649958"
+      href="https://wa.me/916363703988"
       target="_blank"
       rel="noopener"
       aria-label="Order on WhatsApp"

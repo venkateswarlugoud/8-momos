@@ -2,7 +2,53 @@
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
-  const WHATSAPP_NUMBER = "918167649958";
+  const WHATSAPP_NUMBER = "916363703988";
+
+  function getIndiaNowParts() {
+    const dtf = new Intl.DateTimeFormat("en-IN", {
+      timeZone: "Asia/Kolkata",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    });
+    const parts = dtf.formatToParts(new Date());
+    const h = Number(parts.find((p) => p.type === "hour")?.value ?? "0");
+    const m = Number(parts.find((p) => p.type === "minute")?.value ?? "0");
+    return { h, m, minutes: h * 60 + m };
+  }
+
+  function formatTime12h(h24, m) {
+    const ampm = h24 >= 12 ? "PM" : "AM";
+    const h = ((h24 + 11) % 12) + 1;
+    const mm = String(m).padStart(2, "0");
+    return `${h}:${mm} ${ampm}`;
+  }
+
+  function updateOpenPill() {
+    const pill = document.getElementById("openPill");
+    const dot = document.getElementById("openDot");
+    const text = document.getElementById("openText");
+    if (!(pill instanceof HTMLElement) || !(dot instanceof HTMLElement) || !(text instanceof HTMLElement)) return;
+
+    // Opening hours (daily): 13:00–22:30 IST
+    const OPEN_MIN = 13 * 60;
+    const CLOSE_MIN = 22 * 60 + 30;
+
+    const now = getIndiaNowParts().minutes;
+    const isOpen = now >= OPEN_MIN && now < CLOSE_MIN;
+
+    if (isOpen) {
+      dot.classList.remove("dot--closed");
+      text.textContent = "Open for takeaway & delivery";
+      pill.setAttribute("title", `Open now • Closes at ${formatTime12h(22, 30)}`);
+      return;
+    }
+
+    dot.classList.add("dot--closed");
+    const opensAt = formatTime12h(13, 0);
+    text.textContent = `Closed • Opens at ${opensAt}`;
+    pill.setAttribute("title", `Closed now • Opens at ${opensAt}`);
+  }
 
   function whatsappHref(text) {
     return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
@@ -571,6 +617,8 @@
 
   wireDrawer();
   enableMenuQuickOrder();
+  updateOpenPill();
+  window.setInterval(updateOpenPill, 60 * 1000);
 
   // Ensure all in-page links scroll nicely and land correctly.
   document.addEventListener("click", (e) => {
